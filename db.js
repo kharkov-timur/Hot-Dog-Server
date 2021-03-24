@@ -1,3 +1,6 @@
+const pg = require('pg')
+pg.defaults.ssl = true
+
 const { Sequelize } = require('sequelize')
 
 // const sequelize = new Sequelize(
@@ -18,8 +21,12 @@ const sequelize = new Sequelize(
   // process.env.DB_PASSWORD, // user password
   {
     dialect: 'postgres',
+    dialectOptions: {
+      "ssl": true
+    },
     host: 'localhost',
     port: 5432,
+    ssl: true
   }
 )
 
