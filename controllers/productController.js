@@ -1,5 +1,5 @@
 const uuid = require('uuid')
-const path = require('path')
+// const path = require('path')
 const { Product } = require('../models/models')
 const ApiError = require('../error/ApiError')
 
@@ -29,12 +29,12 @@ class ProductController {
   async create(req, res, next) {
     try {
       let { name, price, description, imgUrl } = req.body
-      const { img } = req.files
-      let fileName = uuid.v4() + '.jpg'
-      img.mv(path.resolve(__dirname, '..', 'static', fileName))
+      // const { img } = req.files
+      // let fileName = uuid.v4() + '.jpg'
+      // img.mv(path.resolve(__dirname, '..', 'static', fileName))
 
       const product = await Product
-        .create({ name, price, description, imgUrl, img: fileName })
+        .create({ name, price, description, imgUrl })
 
       return res.json(product)
     } catch (e) {
@@ -47,12 +47,12 @@ class ProductController {
     try {
       const { id } = req.params
       const { name, price, description, imgUrl } = req.body
-      const { img } = req.files
-      let fileName = uuid.v4() + '.jpg'
-      img.mv(path.resolve(__dirname, '..', 'static', fileName))
+      // const { img } = req.files
+      // let fileName = uuid.v4() + '.jpg'
+      // img.mv(path.resolve(__dirname, '..', 'static', fileName))
 
       await Product
-        .update({ name, price, description, imgUrl, img: fileName }, { where: { id } })
+        .update({ name, price, description, imgUrl }, { where: { id } })
 
       return res.status(200).json({message: 'Product updated'})
     } catch (e) {
